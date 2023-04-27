@@ -51,13 +51,13 @@ class CatController extends Controller
             'title' => $request->title,
             'colors_count' => $request->colors_count,
         ]);
-
         return redirect()->route('cats-index');
     }
 
    
     public function destroy(Cat $cat)
     {
-        //
+        $cat->delete();
+        return redirect()->route('cats-index');
     }
 }

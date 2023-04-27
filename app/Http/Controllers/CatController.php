@@ -21,8 +21,7 @@ class CatController extends Controller
    
     public function create()
     {
-        return view('back.cats.create', [
-            
+        return view('back.cats.create', [  
         ]);
     }
 
@@ -40,13 +39,20 @@ class CatController extends Controller
 
     public function edit(Cat $cat)
     {
-        //
+        return view('back.cats.edit', [ 
+            'cat' => $cat,
+        ]);
     }
 
     
     public function update(Request $request, Cat $cat)
     {
-        //
+        $cat->update([
+            'title' => $request->title,
+            'colors_count' => $request->colors_count,
+        ]);
+
+        return redirect()->route('cats-index');
     }
 
    

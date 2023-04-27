@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 
 use App\Models\Cat;
 
@@ -26,16 +27,16 @@ class CatController extends Controller
     }
 
    
-    public function store(StoreCatRequest $request)
+    public function store(Request $request)
     {
-        //
+        Cat::create([
+            'title' => $request->title,
+            'colors_count' => $request->colors_count,
+        ]);
+
+        return redirect()->route('cats-index');
     }
 
-   
-    public function show(Cat $cat)
-    {
-        //
-    }
 
     public function edit(Cat $cat)
     {
@@ -43,7 +44,7 @@ class CatController extends Controller
     }
 
     
-    public function update(UpdateCatRequest $request, Cat $cat)
+    public function update(Request $request, Cat $cat)
     {
         //
     }

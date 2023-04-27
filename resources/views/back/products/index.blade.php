@@ -6,7 +6,7 @@
         <div class="col-12">
             <div class="card mt-5">
                 <div class="card-header">
-                    <h1>Categories List</h1>
+                    <h1>Products List</h1>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
@@ -22,6 +22,7 @@
                                     </div>
                                 </div>
                                 <div class="buttons">
+                                    <a href="{{route('cats-show', $cat)}}" class="btn btn-outline-info">Show</a>
                                     <a href="{{route('cats-edit', $cat)}}" class="btn btn-outline-success">Edit</a>
                                     <form action="{{route('cats-delete', $cat)}}" method="post">
                                         <button type="submit" class="btn btn-outline-danger">Delete</button>

@@ -20,7 +20,9 @@ class CatController extends Controller
    
     public function create()
     {
-        //
+        return view('back.cats.create', [
+            
+        ]);
     }
 
    

@@ -16,16 +16,29 @@ if (document.querySelector('.--colors--counter')) {
     range.addEventListener('change', _ => print.innerText = range.value);
 }
 
-    if (document.querySelector('.--cat--select')) {
-        const select = document.querySelector('.--cat--select');
-        select.addEventListener('change', _ => {
-            axios.get(select.dataset.url + '?cat=' + select.value)
-                .then(res => {
-                    // const bin = document.querySelector('.--colors--selectors');
-                    // bin.innerHTML = res.data.html;
-                    // addNameEvents(bin, select);
-                    console.log(res.data);
-                })
-        })
+if (document.querySelector('.--cat--select')) {
+    const select = document.querySelector('.--cat--select');
+    select.addEventListener('change', _ => {
+        axios.get(select.dataset.url + '?cat=' + select.value)
+            .then(res => {
+                const bin = document.querySelector('.--colors--selectors');
+                bin.innerHTML = res.data.html;
+                addNameEvents(bin, select);
+                // console.log(res.data);
+            })
+    })
+}
 
-    }
+const addNameEvents = (bin, select) => {
+    bin.querySelectorAll('[type=color]')
+        .forEach(i => {
+            i.addEventListener('change', _ => {
+                i.closest('.one-color').querySelector('.color-view').style.backgroundColor = i.value;
+                axios.get(select.dataset.urlName + '?color=' + i.value.substring(1))
+                    .then(res => {
+                        i.closest('.one-color').querySelector('.color-view').innerText = res.data.name;
+                        i.closest('.one-color').querySelector('[type=hidden]').value = res.data.name;
+                    });
+            });
+        });
+}

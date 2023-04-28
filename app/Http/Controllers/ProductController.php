@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Cat;
+use App\Models\Color;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -16,14 +18,20 @@ class ProductController extends Controller
     
     public function create()
     {
+        $cats = Cat::all();
         return view('back.products.create', [  
+            'cats' => $cats
         ]);
     }
 
+    public function colors()
+    {    
+       
+    }
    
     public function store(Request $request)
     {
-        //
+        
     }
 
     

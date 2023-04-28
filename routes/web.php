@@ -31,6 +31,7 @@ Route::prefix('cats')->name('cats-')->group(function () {
 
 Route::prefix('products')->name('products-')->group(function () {
     Route::get('/', [P::class, 'index'])->name('index');
+    Route::get('/colors', [P::class, 'colors'])->name('colors');
     Route::get('/create', [P::class, 'create'])->name('create');
     Route::post('/create', [P::class, 'store'])->name('store');
     Route::get('/show/{product}', [P::class, 'show'])->name('show');
@@ -38,7 +39,6 @@ Route::prefix('products')->name('products-')->group(function () {
     Route::put('/edit/{product}', [P::class, 'update'])->name('update');
     Route::delete('/delete/{product}', [P::class, 'destroy'])->name('delete');
 });
-
 
 Auth::routes();
 

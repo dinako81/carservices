@@ -8,24 +8,26 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('colors', function (Blueprint $table) {
             $table->id();
             $table->string('hex', 7);
             $table->string('title', 100)->nullable();
-            // pavadinimo gali dar nebuti, dar gali buti nepasikreipta i serveri
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            // produktas turedamas spalvu gales buti istrintas
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('colors');
     }

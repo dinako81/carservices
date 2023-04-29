@@ -7,6 +7,7 @@ const randColor = _ => {
     return '#' + Math.floor(Math.random() * 16777215).toString(16).padEnd(6, '0');
 }
 
+
 document.querySelectorAll('.--random--color')
     .forEach(div => div.style.backgroundColor = randColor());
 
@@ -27,8 +28,8 @@ if (document.querySelector('.--cat--select')) {
                 // console.log(res.data);
             })
     })
-}
 
+}
 const addNameEvents = (bin, select) => {
     bin.querySelectorAll('[type=color]')
         .forEach(i => {
@@ -42,3 +43,14 @@ const addNameEvents = (bin, select) => {
             });
         });
 }
+
+// puslapio krovimo metu
+if (document.querySelector('.--colors--selectors')) {
+    addNameEvents(
+        document.querySelector('.--colors--selectors'),
+        document.querySelector('.--cat--select')
+    );
+}
+
+
+// ifai pasileidzia puslapio krovimo metu

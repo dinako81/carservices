@@ -8,19 +8,24 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('cats', function (Blueprint $table) {
             $table->id();
             $table->string('title', 100);
             $table->unsignedTinyInteger('colors_count');
-            // kiek spalvu tures kategorija
         });
     }
 
-    
-    public function down(): void
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
     {
         Schema::dropIfExists('cats');
     }

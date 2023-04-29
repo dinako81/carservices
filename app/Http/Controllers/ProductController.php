@@ -13,7 +13,10 @@ class ProductController extends Controller
     
     public function index()
     {
-        //
+        $products = Product::all();
+        return view('back.products.index', [  
+            'products' => $products
+        ]);
     }
 
     
@@ -26,26 +29,18 @@ class ProductController extends Controller
     }
 
     public function colors(Request $request)
-    {    
-       
+    {
+
         $colorsCount = Cat::where('id', $request->cat)->first()->colors_count;
-        // Cat::where('id', $request->cat)-neivykdyta uzklausa i duomenu baze, first ivykdo uzklausa pasiima is dees pirma elementa ir paduoda
 
         $html = view('back.products.colors')
         ->with(['colorsCount' => $colorsCount])
         ->render();
 
-        // renderinimas - kintamuju i html'a idejimas
-        // kintamasis aprasytas back.products.colors faile
-
-
-        // perduodam html gabala kaip stringa
-        
-       return response()->json([
-        'html' => $html,
-        'message' => 'Labas',
-    ]);
-
+        return response()->json([
+            'html' => $html,
+            'message' => 'OK',
+        ]);
     }
 
     public function colorName(Request $request, ColorNamingService $cns)
@@ -55,12 +50,26 @@ class ProductController extends Controller
             'message' => 'OK',
         ]);
     }
-   
+
+
     public function store(Request $request)
     {
-        
-    }
+        $id = Product::create([
+            'title' => $request->title,
+            'price' => $request->price,
+            'cat_id' =>$request->cat_id
+        ])->id;
 
+        foreach ( $request->color as $index => $color) {
+            Color::create([
+                'title' => $request->name[$index],
+                'hex' => $color,
+                'product_id' => $id
+            ]);
+        }
+
+        return redirect()->route('products-index');
+    }
     
     public function show(Product $product)
     {
@@ -70,18 +79,40 @@ class ProductController extends Controller
    
     public function edit(Product $product)
     {
-        //
+        $cats = Cat::all();
+        
+        return view('back.products.edit', [
+            'product' => $product,
+            'cats' => $cats
+        ]);
     }
 
   
     public function update(Request $request, Product $product)
     {
-        //
+        $product->update([
+            'title' => $request->title,
+            'price' => $request->price,
+            'cat_id' =>$request->cat_id
+        ]);
+
+        $product->color()->delete();
+
+        foreach ($request->color as $index => $color) {
+            Color::create([
+                'title' => $request->name[$index],
+                'hex' => $color,
+                'product_id' => $product->id
+            ]);
+        }
+
+        return redirect()->route('products-index');
     }
 
    
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('products-index');
     }
 }

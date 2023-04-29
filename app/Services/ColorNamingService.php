@@ -1,16 +1,18 @@
 <?php
 
 namespace App\Services;
+use Illuminate\Support\Facades\Http;
 
 
 class ColorNamingService
 {
 
-    public function nameIt()
+    public function nameIt($color)
     {
-       
+        $response = Http::get('https://www.thecolorapi.com/id?hex='.$color);
 
-        return 'pink sweet';
+        return json_decode($response)->name->value;
+        // issidzeisoninam kad butu masyvas, kad issikviesti name, o name value
         
     }
 

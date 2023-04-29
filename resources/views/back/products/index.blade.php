@@ -19,35 +19,35 @@
                                             <h2>{{$product->title}}<span>{{$product->price}} EUR</span></h2>
 
                                         </div>
-                                        {{-- @if(Auth::user()->role < 5) <div class="buttons"> --}}
-                                        <a href="{{route('products-edit', $product)}}" class="btn btn-outline-success">Edit</a>
-                                        <form action="{{route('products-delete', $product)}}" method="post">
-                                            <button type="submit" class="btn btn-outline-danger">delete</button>
-                                            @csrf
-                                            @method('delete')
-                                        </form>
-                                        {{-- </div> --}}
-                                        {{-- @endif --}}
+                                        @if(Auth::user()->role < 5) <div class="buttons">
+                                            <a href="{{route('products-edit', $product)}}" class="btn btn-outline-success">Edit</a>
+                                            <form action="{{route('products-delete', $product)}}" method="post">
+                                                <button type="submit" class="btn btn-outline-danger">delete</button>
+                                                @csrf
+                                                @method('delete')
+                                            </form>
                                     </div>
-                                    <div class="colors">
-                                        @foreach($product->color as $color)
-                                        <div class="color" style="background-color:{{$color->hex}};">
-                                            {{$color->title}}
-                                        </div>
-                                        @endforeach
+                                    @endif
+                                </div>
+                                <div class="colors">
+                                    @foreach($product->color as $color)
+                                    <div class="color" style="background-color:{{$color->hex}};">
+                                        {{$color->title}}
                                     </div>
+                                    @endforeach
                                 </div>
                             </div>
-                        </li>
-                        @empty
-                        <li class="list-group-item">
-                            <div class="cat-line">No products</div>
-                        </li>
-                        @endforelse
-                    </ul>
                 </div>
+                </li>
+                @empty
+                <li class="list-group-item">
+                    <div class="cat-line">No products</div>
+                </li>
+                @endforelse
+                </ul>
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection

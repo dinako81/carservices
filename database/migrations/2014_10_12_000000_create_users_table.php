@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->unsignedTinyInteger('role')->defaul(10);
+            // default 10. "10" reikia client
             $table->rememberToken();
             $table->timestamps();
         });

@@ -170,6 +170,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         
         App\Providers\ColorNamingServiceProvider::class,
+        App\Providers\CatsServiceProvider::class,
 
     ])->toArray(),
 

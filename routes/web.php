@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CatController as C;
 use App\Http\Controllers\ProductController as P;
+use App\Http\Controllers\FrontController as F;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,18 +16,22 @@ use App\Http\Controllers\ProductController as P;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::name('front-')->group(function () {
+    Route::get('/', [F::class, 'index'])->name('index');
+    Route::get('/category/{cat}', [F::class, 'catColors'])->name('cat-colors');
+    Route::get('/product/{product}', [F::class, 'showProduct'])->name('show-product');
+    Route::get('/my-orders', [F::class, 'orders'])->name('orders');
+    Route::get('/download/{order}', [F::class, 'download'])->name('download');
 });
 
 
 Route::prefix('cats')->name('cats-')->group(function () {
-    Route::get('/', [C::class, 'index'])->name('index');
-    Route::get('/create', [C::class, 'create'])->name('create');
-    Route::post('/create', [C::class, 'store'])->name('store');
-    Route::get('/edit/{cat}', [C::class, 'edit'])->name('edit');
-    Route::put('/edit/{cat}', [C::class, 'update'])->name('update');
-    Route::delete('/delete/{cat}', [C::class, 'destroy'])->name('delete');
+    Route::get('/', [C::class, 'index'])->name('index')->middleware('role:admin|client');
+    Route::get('/create', [C::class, 'create'])->name('create')->middleware('role:admin|client');
+    Route::post('/create', [C::class, 'store'])->name('store')->middleware('role:admin|client');
+    Route::get('/edit/{cat}', [C::class, 'edit'])->name('edit')->middleware('role:admin|client');
+    Route::put('/edit/{cat}', [C::class, 'update'])->name('update')->middleware('role:admin|client');
+    Route::delete('/delete/{cat}', [C::class, 'destroy'])->name('delete')->middleware('role:admin|client');
 });
 
 Route::prefix('products')->name('products-')->group(function () {

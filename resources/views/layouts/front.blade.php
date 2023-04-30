@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
     <!-- Scripts -->
-    @vite(['resources/back/sass/app.scss', 'resources/back/js/app.js'])
+    @vite(['resources/front/sass/app.scss', 'resources/front/js/app.js'])
 </head>
 <body>
     <div id="app">

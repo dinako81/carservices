@@ -17,4 +17,21 @@ class FrontController extends Controller
         ]);
     }
 
+    public function catColors(Cat $cat)
+    {
+        $products = $cat->product;
+
+        return view('front.cat-index', [
+            'products' => $products,
+            'cat' => $cat
+        ]);
+    }
+
+    public function showProduct(Product $product)
+    {
+        return view('front.product', [
+            'product' => $product,
+        ]);
+    }
+
 }

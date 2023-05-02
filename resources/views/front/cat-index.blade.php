@@ -9,7 +9,7 @@
         <div class="col-9">
             <div class="card mt-5">
                 <div class="card-header">
-                    <h2>Products</h2>
+                    <h2>{{$cat->title}} products</h2>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">

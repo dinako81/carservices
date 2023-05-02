@@ -31,5 +31,15 @@ class CartController extends Controller
         ]);
     }
 
+    public function miniCart(Request $request)
+    {
+        $cart = $request->session()->get('cart', []);
+        $Cart = new Cart($cart);
+        return response()->json([
+            'count' => count($cart),
+            'total' => $Cart->total()
+        ]);
+    }
+
     
 }

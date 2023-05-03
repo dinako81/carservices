@@ -14,9 +14,6 @@ class Cart{
         // constructorius gave cart nukeliauja i DB ir surekta visus productus kurie isvardinti cart. Kad toliau turetumem is ko skaiciuot
         $productsId = array_keys($cart);
         $this->products = Product::whereIn('id', $productsId)->get();
-
-// dump ($this->products);
-
         $this->products = $this->products->map(function($p) use ($cart) {
             $p->count = $cart[$p->id];
             return $p;
@@ -37,5 +34,7 @@ class Cart{
     {
         return $this->products;
     }
+
+    // kasike rodys produktus
 
 }

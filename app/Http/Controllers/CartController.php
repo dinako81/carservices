@@ -1,9 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Entities\Cart;
+use App\Models\Order;
 
 class CartController extends Controller
 {
@@ -62,11 +62,64 @@ class CartController extends Controller
         $id = (int) $request->id;
         $cart = $request->session()->get('cart', []);
         unset($cart[$id]);
+        // istrina
         $request->session()->put('cart', $cart);
 
         return redirect()->back();
         
     }
 
+    public function update(Request $request)
+    {
+
+        $id = (int) $request->id;
+        // ka update
+        $count = (int) $request->count;
+        // i ka update
+        $cart = $request->session()->get('cart', []);
+        $cart[$id] = $count;
+        // updatinam nauja kieki
+        $request->session()->put('cart', $cart);
+        // idedam
+
+        return redirect()->back();
+
+    }
+
+
+    public function buy(Request $request)
+    {
+        $cart = $request->session()->get('cart', []);
+        $Cart = new Cart($cart);
+
+        $products = [];
+        $total = 0;
+
+        $Cart->products()->each(function($p, $key) use (&$total, &$products) {
+
+            $products[$key]['title'] = $p->title;
+            $products[$key]['count'] = $p->count;
+            $products[$key]['price'] = $p->price;
+            $products[$key]['total'] = $p->count * $p->price;
+            $total += $products[$key]['total'];
+
+        });
+
+        // $products = json_encode($products);
+        $userId = $request->user()->id;
+
+        Order::create([
+            'products' => $products,
+            'user_id' => $userId,
+            'price' => $total
+        ]);
+
+        $request->session()->put('cart', []);
+
+        // kai viska upirkom reikia is sesijos istrinti krepseli
+
+        return redirect()->route('front-index');
+
+    }
     
 }

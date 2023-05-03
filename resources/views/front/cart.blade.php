@@ -55,6 +55,7 @@
 
                         <div class="buy-now">
                             @guest
+                            {{-- @guest- jeigu yra neprisiregistraves svecias --}}
                             <h3>Please login to buy</h3>
                             @else
                             <form action="{{route('cart-buy')}}" method="post">

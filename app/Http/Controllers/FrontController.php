@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Cat;
-
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -33,5 +33,17 @@ class FrontController extends Controller
             'product' => $product,
         ]);
     }
+
+    public function orders(Request $request)
+    {
+        $orders = $request->user()->order;
+
+        return view('front.orders', [
+            'orders' => $orders,
+            'status' => Order::STATUS
+        ]);
+    }
+
+
 
 }

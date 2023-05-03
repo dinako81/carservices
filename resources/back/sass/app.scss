@@ -1,10 +1,5 @@
-
-// Variables
 @import 'variables';
-
-// Bootstrap
 @import 'bootstrap/scss/bootstrap';
-
 .form-label {
     font-size: 20px;
 }
@@ -17,6 +12,13 @@
     .cat-info {
         display: flex;
         justify-content: space-around;
+        .photo {
+            margin: 0 10px;
+            img {
+                height: 100px;
+                width: auto;
+            }
+        }
         .cat-colors-count {
             display: flex;
             justify-content: flex-start;
@@ -105,4 +107,65 @@
             }
         }
     }
+}
+
+.front-orders {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    .front-order {
+        width: 50%;
+        .front-order-number {
+            font-size: 26px;
+            color: crimson;
+            font-weight: bold;
+        }
+        .front-order-user {
+            font-size: 22px;
+            color: orange;
+        }
+        .front-order-status {
+            padding: 10px 0;
+            letter-spacing: 3px;
+        }
+    }
+    .front-order-products {
+        display: flex;
+        justify-content: flex-end;
+        width: 50%;
+        .front-order-products-list {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            span {
+                font-size: 20px;
+                color: skyblue;
+                padding: 0 10px;
+            }
+            i {
+                padding: 0 10px;
+                font-style: normal;
+            }
+        }
+    }
+}
+
+[data-gallery="0"] {
+    display: none;
+}
+
+span.rem {
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid crimson;
+    background-color: crimson;
+    border-radius: 50%;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
 }

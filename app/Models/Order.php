@@ -15,5 +15,10 @@ class Order extends Model
     ];
     // is stringo gabala sucastina imasyva, array bus automatiskai paverstas i jason stringa kuris tiks DB
 
+    const STATUS = [
+        1 => 'Proccesing',
+        2 => 'Confirmed'
+    ];
+
    
 }

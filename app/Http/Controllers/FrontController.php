@@ -5,6 +5,7 @@ use App\Models\Product;
 use App\Models\Cat;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class FrontController extends Controller
 {
@@ -43,7 +44,29 @@ class FrontController extends Controller
             'status' => Order::STATUS
         ]);
     }
+    public function download(Order $order)
+    {
 
+
+        $productNames = array_map(fn($p) => $p['title'], $order->products);
+
+        // mapinam $order->products, ir grazninam product is vardu
+
+        $products = Product::whereIn('title', $productNames)->get();
+        // reikia susirasti produktus pagl spalvas
+
+        // return view('front.pdf',[
+        //         'order' => $order,
+        //         'products' => $products,
+        // ]);
+
+        $pdf = Pdf::loadView('front.pdf',[
+            'order' => $order,
+            'products' => $products,
+        ]);
+
+        return $pdf->download('order-'.$order->id.'.pdf');
+    }
 
 
 }

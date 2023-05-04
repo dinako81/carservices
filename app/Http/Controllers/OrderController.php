@@ -19,33 +19,13 @@ class OrderController extends Controller
     }
 
     
-    public function create()
+       
+    public function update(Request $request, Order $order)
     {
-        //
-    }
-
-    
-    public function store(StoreOrderRequest $request)
-    {
-        //
-    }
-
-    
-    public function show(Order $order)
-    {
-        //
-    }
-
-    
-    public function edit(Order $order)
-    {
-        //
-    }
-
-   
-    public function update(UpdateOrderRequest $request, Order $order)
-    {
-        //
+        $order->update([
+            'status' => $request->status,
+        ]);
+        return redirect()->route('orders-index');
     }
 
  

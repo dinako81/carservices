@@ -29,6 +29,11 @@ class CatController extends Controller
    
     public function store(Request $request)
     {
+        $photo = $request->photo;
+        if ($photo) {
+            $name = $cat->savePhoto($photo);
+        }
+
         Cat::create([
             'title' => $request->title,
             'colors_count' => $request->colors_count,

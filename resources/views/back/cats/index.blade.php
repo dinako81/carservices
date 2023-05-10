@@ -14,6 +14,13 @@
                         <li class="list-group-item">
                             <div class="cat-line">
                                 <div class="cat-info">
+                                    <div class="photo">
+                                        @if($cat->photo)
+                                        <img src="{{asset('cats-photo') .'/t_'. $cat->photo}}">
+                                        @else
+                                        <img src="{{asset('cats-photo') .'/no.jpg'}}">
+                                        @endif
+                                    </div>
                                     <h2>{{$cat->title}}</h2>
                                     <div class="cat-colors-count">
                                         @for($i = 0; $i < $cat->colors_count; $i++)
@@ -24,7 +31,7 @@
                                 <div class="buttons">
                                     <a href="{{route('cats-edit', $cat)}}" class="btn btn-outline-success">Edit</a>
                                     <form action="{{route('cats-delete', $cat)}}" method="post">
-                                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                        <button type="submit" class="btn btn-outline-danger">delete</button>
                                         @csrf
                                         @method('delete')
                                     </form>
@@ -33,7 +40,7 @@
                         </li>
                         @empty
                         <li class="list-group-item">
-                            <div class="cat-line">No cattiegories</div>
+                            <div class="cat-line">No categories</div>
                         </li>
                         @endforelse
                     </ul>

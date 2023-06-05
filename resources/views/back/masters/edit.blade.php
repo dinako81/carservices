@@ -15,17 +15,17 @@
                             <input type="text" class="form-control" name="title" value={{old('title', $cat->title)}}>
                             <div class="form-text">Please add categorie name here</div>
                         </div>
-                        {{-- <div class="mb-3 cat-color-range">
+                        <div class="mb-3 cat-color-range">
                             <label class="form-label">Colors Count: <span class="--colors--counter">{{old('colors_count', $cat->colours_count)}}</span></label>
-                        <input type="range" min="1" max="6" class="form-range --colors--counter" name="colors_count" value={{old('colors_count', $cat->colours_count)}}>
-                </div> --}}
-                <button type="submit" class="btn btn-primary">Submit</button>
-                @csrf
-                @method('put')
-                </form>
+                            <input type="range" min="1" max="6" class="form-range --colors--counter" name="colors_count" value={{old('colors_count', $cat->colours_count)}}>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        @csrf
+                        @method('put')
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 @endsection

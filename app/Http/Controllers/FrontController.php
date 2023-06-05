@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Product;
+use App\Models\Service;
 use App\Models\Cat;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -11,27 +11,27 @@ class FrontController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $services = Service::all();
 
         return view('front.index', [
-            'products' => $products
+            'services' => $services
         ]);
     }
 
     public function catColors(Cat $cat)
     {
-        $products = $cat->product;
+        $services = $cat->service;
 
         return view('front.cat-index', [
-            'products' => $products,
+            'services' => $services,
             'cat' => $cat
         ]);
     }
 
-    public function showProduct(Product $product)
+    public function showService(Service $service)
     {
-        return view('front.product', [
-            'product' => $product,
+        return view('front.service', [
+            'service' => $service,
         ]);
     }
 
@@ -48,21 +48,21 @@ class FrontController extends Controller
     {
 
 
-        $productNames = array_map(fn($p) => $p['title'], $order->products);
+        $serviceNames = array_map(fn($p) => $p['title'], $order->services);
 
-        // mapinam $order->products, ir grazninam product is vardu
+        // mapinam $order->servicies, ir grazninam service is vardu
 
-        $products = Product::whereIn('title', $productNames)->get();
+        $servicies = Service::whereIn('title', $serviceNames)->get();
         // reikia susirasti produktus pagl spalvas
 
         // return view('front.pdf',[
         //         'order' => $order,
-        //         'products' => $products,
+        //         'servicies' => $servicies,
         // ]);
 
         $pdf = Pdf::loadView('front.pdf',[
             'order' => $order,
-            'products' => $products,
+            'servicies' => $servicies,
         ]);
 
         return $pdf->download('order-'.$order->id.'.pdf');

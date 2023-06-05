@@ -17,10 +17,8 @@
                                     <div class="front-order-number">#{{$order->id}}</div>
                                     <div class="front-order-user">{{$order->user->name}}</div>
                                     <form action="{{route('orders-update', $order)}}" method="post">
-                                        <button type="submit" name=status value="1"
-                                            class="btn btn-warning">Proccesing</button>
-                                        <button type="submit" name=status value="2"
-                                            class="btn btn-warning">Confirmed</button>
+                                        <button type="submit" name=status value="1" class="btn btn-warning">Proccesing</button>
+                                        <button type="submit" name=status value="2" class="btn btn-warning">Confirmed</button>
                                         @csrf
                                         @method('put')
                                     </form>
@@ -28,21 +26,21 @@
                                     <div class="front-order-status">{{$status[$order->status]}}</div>
 
                                 </div>
-                                <div class="front-order-products">
+                                <div class="front-order-services">
                                     <ul class="list-group">
-                                        @foreach($order->products as $product)
+                                        @foreach($order->services as $service)
                                         <li class="list-group-item">
-                                            <div class="front-order-products-list">
-                                                <span>{{$product['title']}}</span>
-                                                <i>{{$product['price']}} eur</i>
+                                            <div class="front-order-services-list">
+                                                <span>{{$service['title']}}</span>
+                                                <i>{{$service['price']}} eur</i>
                                                 X
-                                                <i>{{$product['count']}}</i>
-                                                <b>{{$product['total']}} eur</b>
+                                                <i>{{$service['count']}}</i>
+                                                <b>{{$service['total']}} eur</b>
                                             </div>
                                         </li>
                                         @endforeach
                                         <li class="list-group-item">
-                                            <div class="front-order-products-list">
+                                            <div class="front-order-services-list">
                                                 <b>{{$order->price}} eur</b>
                                             </div>
                                         </li>

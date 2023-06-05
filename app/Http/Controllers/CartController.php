@@ -51,8 +51,8 @@ class CartController extends Controller
         return view('front.cart', [
             'count' => count($cart),
             'total' => $Cart->total(),
-            'products' => $Cart->products()
-            // $Cart->products() is entities Cart
+            'services' => $Cart->services()
+            // $Cart->services() is entities Cart
         ]);
     }
 
@@ -92,24 +92,24 @@ class CartController extends Controller
         $cart = $request->session()->get('cart', []);
         $Cart = new Cart($cart);
 
-        $products = [];
+        $services = [];
         $total = 0;
 
-        $Cart->products()->each(function($p, $key) use (&$total, &$products) {
+        $Cart->services()->each(function($p, $key) use (&$total, &$services) {
 
-            $products[$key]['title'] = $p->title;
-            $products[$key]['count'] = $p->count;
-            $products[$key]['price'] = $p->price;
-            $products[$key]['total'] = $p->count * $p->price;
-            $total += $products[$key]['total'];
+            $services[$key]['title'] = $p->title;
+            $services[$key]['count'] = $p->count;
+            $services[$key]['price'] = $p->price;
+            $services[$key]['total'] = $p->count * $p->price;
+            $total += $services[$key]['total'];
 
         });
 
-        // $products = json_encode($products);
+        // $services = json_encode($services);
         $userId = $request->user()->id;
 
         Order::create([
-            'products' => $products,
+            'services' => $services,
             'user_id' => $userId,
             'price' => $total
         ]);

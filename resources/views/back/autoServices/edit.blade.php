@@ -6,10 +6,10 @@
         <div class="col-12">
             <div class="card mt-5">
                 <div class="card-header">
-                    <h1>Add Product</h1>
+                    <h1>Add Service</h1>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('products-update', $product)}}" method="post">
+                    <form action="{{route('services-update', $service)}}" method="post">
 
                         <div class="container">
                             <div class="row">
@@ -17,32 +17,32 @@
 
 
                                     <div class="mb-3">
-                                        <label class="form-label">Product Tile</label>
-                                        <input type="text" class="form-control" name="title" value={{old('title', $product->title)}}>
-                                        <div class="form-text">Please add product title here</div>
+                                        <label class="form-label">Service Tile</label>
+                                        <input type="text" class="form-control" name="title" value={{old('title', $service->title)}}>
+                                        <div class="form-text">Please add service title here</div>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="mb-3">
-                                        <label class="form-label">Product Price</label>
-                                        <input type="text" class="form-control" name="price" value={{old('price', $product->price)}}>
-                                        <div class="form-text">Please add product here</div>
+                                        <label class="form-label">Service Price</label>
+                                        <input type="text" class="form-control" name="price" value={{old('price', $service->price)}}>
+                                        <div class="form-text">Please add service here</div>
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                    <label class="form-label">Product Category</label>
-                                    <select class="form-select --cat--select" name="cat_id" data-url="{{route('products-colors')}}" data-url-name="{{route('products-color-name')}}">
+                                    <label class="form-label">Service Category</label>
+                                    <select class="form-select --cat--select" name="cat_id" data-url="{{route('services-colors')}}" data-url-name="{{route('services-color-name')}}">
                                         <option value="0">Cats list</option>
                                         @foreach($cats as $cat)
-                                        <option value="{{$cat->id}}" @if($product->cat_id == $cat->id) selected @endif>{{$cat->title}} ({{$cat->colors_count}})</option>
+                                        <option value="{{$cat->id}}" @if($service->cat_id == $cat->id) selected @endif>{{$cat->title}} ({{$cat->colors_count}})</option>
                                         @endforeach
                                     </select>
-                                    <div class="form-text">Please select product category here</div>
+                                    <div class="form-text">Please select service category here</div>
                                 </div>
                                 <div class="col-12">
                                     <div class="colors-selectors --colors--selectors">
 
-                                        @foreach($product->color as $color)
+                                        @foreach($service->color as $color)
                                         <div class="one-color">
                                             <input type="color" name="color[]" value={{$color->hex}}>
                                             <input type="hidden" name="name[]" value={{$color->title}}>

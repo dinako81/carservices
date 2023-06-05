@@ -9,16 +9,13 @@ class Cat extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'colors_count', 'photo'];
+    protected $fillable = ['title', 'address', 'phone'];
     public $timestamps = false;
 
-    public function product()
+    public function service()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Service::class);
     }
 
-    public function gallery()
-    {
-        return $this->hasMany(Photo::class, 'cat_id', 'id');
-    }
+    
 }

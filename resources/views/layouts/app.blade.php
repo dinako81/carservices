@@ -32,27 +32,40 @@
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Categories
+                                Car Services
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('cats-index') }}">
-                                    Categories list
+                                    Car Services list
                                 </a>
                                 <a class="dropdown-item" href="{{ route('cats-create') }}">
-                                    New Category
+                                    New Car Service
                                 </a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Products
+                                Provided services
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('products-index') }}">
-                                    Products list
+                                <a class="dropdown-item" href="{{ route('services-index') }}">
+                                    Provided services list
                                 </a>
-                                <a class="dropdown-item" href="{{ route('products-create') }}">
-                                    New Product
+                                <a class="dropdown-item" href="{{ route('services-create') }}">
+                                    New Provided services
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Masters
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('masters-index') }}">
+                                    Masters list
+                                </a>
+                                <a class="dropdown-item" href="{{ route('masters-create') }}">
+                                    New Master
                                 </a>
                             </div>
                         </li>

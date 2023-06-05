@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
-    protected $fillable = ['products', 'user_id', 'status', 'price'];
+    protected $fillable = ['services', 'user_id', 'status', 'price'];
     public $timestamps = false;
     protected $casts = [
-        'products' => 'array',
+        'services' => 'array',
     ];
     // is stringo gabala sucastina imasyva, array bus automatiskai paverstas i jason stringa kuris tiks DB
 

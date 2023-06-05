@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cat;
-use App\Models\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Http\UploadedFile;
 
 
 class CatController extends Controller

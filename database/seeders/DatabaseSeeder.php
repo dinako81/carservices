@@ -37,11 +37,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         foreach([
-            'Mono Color',
-            'Stereo Pallete',
-            'Three Pastels',
-            'Four Seasons',
-            'Five Stars'
+            'Kreivas raktas',
+            'Beratis',
+            'Karma',
+            'Demontas',
+            'Profikai'
         ] as $count => $title) {
             DB::table('cats')->insert([
                 'title' => $title,
@@ -53,20 +53,20 @@ class DatabaseSeeder extends Seeder
 
         foreach(range(1, 20) as $_) {
             $catId = rand(1, 5);
-            $id = DB::table('products')->insertGetId([
+            $id = DB::table('services')->insertGetId([
                 'title' => $faker->cityPrefix. ' ' .$faker->streetSuffix,
                 'price' => rand(100, 5000) / 100,
                 'cat_id' => $catId
             ]);
 
-            foreach(range(1, $catId) as $_) {
-                $hex = $faker->hexcolor;
-                DB::table('colors')->insert([
-                    'hex' => $hex,
-                    'title' => $cns->nameIt(substr($hex, 1)),
-                    'product_id' => $id
-                ]);
-            }
+            // foreach(range(1, $catId) as $_) {
+            //     $hex = $faker->hexcolor;
+            //     DB::table('colors')->insert([
+            //         'hex' => $hex,
+            //         'title' => $cns->nameIt(substr($hex, 1)),
+            //         'product_id' => $id
+            //     ]);
+            // }
 
         }
 

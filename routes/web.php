@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CatController as C;
-use App\Http\Controllers\ProductController as P;
+use App\Http\Controllers\ServiceController as P;
+use App\Http\Controllers\MasterController as M;
 use App\Http\Controllers\FrontController as F;
 use App\Http\Controllers\CartController as CART;
 use App\Http\Controllers\OrderController as O;
@@ -22,8 +23,8 @@ use App\Http\Controllers\OrderController as O;
 
 Route::name('front-')->group(function () {
     Route::get('/', [F::class, 'index'])->name('index');
-    Route::get('/category/{cat}', [F::class, 'catColors'])->name('cat-colors');
-    Route::get('/product/{product}', [F::class, 'showProduct'])->name('show-product');
+    // Route::get('/category/{cat}', [F::class, 'catColors'])->name('cat-colors');
+    Route::get('/service/{service}', [F::class, 'showService'])->name('show-service');
     Route::get('/my-orders', [F::class, 'orders'])->name('orders')->middleware('role:admin|client');
     Route::get('/download/{order}', [F::class, 'download'])->name('download')->middleware('role:admin|client');
 });
@@ -46,26 +47,35 @@ Route::prefix('cats')->name('cats-')->group(function () {
     Route::delete('/delete/{cat}', [C::class, 'destroy'])->name('delete')->middleware('role:admin');
 });
 
-Route::prefix('products')->name('products-')->group(function () {
+Route::prefix('services')->name('services-')->group(function () {
     Route::get('/', [P::class, 'index'])->name('index')->middleware('role:admin|client');
-    Route::get('/colors', [P::class, 'colors'])->name('colors')->middleware('role:admin');
-    Route::get('/color-name', [P::class, 'colorName'])->name('color-name')->middleware('role:admin');
+    // Route::get('/colors', [P::class, 'colors'])->name('colors')->middleware('role:admin');
+    // Route::get('/color-name', [P::class, 'colorName'])->name('color-name')->middleware('role:admin');
     Route::get('/create', [P::class, 'create'])->name('create')->middleware('role:admin');
     Route::post('/create', [P::class, 'store'])->name('store')->middleware('role:admin');
-    Route::get('/{product}', [P::class, 'show'])->name('show')->middleware('role:admin');
-    Route::get('/edit/{product}', [P::class, 'edit'])->name('edit')->middleware('role:admin');
-    Route::put('/edit/{product}', [P::class, 'update'])->name('update')->middleware('role:admin');
-    Route::delete('/delete/{product}', [P::class, 'destroy'])->name('delete')->middleware('role:admin');
+    Route::get('/{service}', [P::class, 'show'])->name('show')->middleware('role:admin');
+    Route::get('/edit/{service}', [P::class, 'edit'])->name('edit')->middleware('role:admin');
+    Route::put('/edit/{service}', [P::class, 'update'])->name('update')->middleware('role:admin');
+    Route::delete('/delete/{service}', [P::class, 'destroy'])->name('delete')->middleware('role:admin');
+});
+
+Route::prefix('masters')->name('masters-')->group(function () {
+    Route::get('/', [M::class, 'index'])->name('index')->middleware('role:admin');
+    Route::get('/create', [M::class, 'create'])->name('create')->middleware('role:admin');
+    Route::post('/create', [M::class, 'store'])->name('store')->middleware('role:admin');
+    Route::get('/edit/{cat}', [M::class, 'edit'])->name('edit')->middleware('role:admin');
+    Route::put('/edit/{cat}', [M::class, 'update'])->name('update')->middleware('role:admin');
+    Route::delete('/delete/{cat}', [M::class, 'destroy'])->name('delete')->middleware('role:admin');
 });
 
 Route::prefix('orders')->name('orders-')->group(function () {
     Route::get('/', [O::class, 'index'])->name('index')->middleware('role:admin');
     Route::put('/status/{order}', [O::class, 'update'])->name('update')->middleware('role:admin');
-    // Route::get('/create', [C::class, 'create'])->name('create')->middleware('role:admin');
-    // Route::post('/create', [C::class, 'store'])->name('store')->middleware('role:admin');
-    // Route::get('/edit/{cat}', [C::class, 'edit'])->name('edit')->middleware('role:admin');
-    // Route::put('/edit/{cat}', [C::class, 'update'])->name('update')->middleware('role:admin');
-    // Route::delete('/delete/{cat}', [C::class, 'destroy'])->name('delete')->middleware('role:admin');
+    // Route::get('/create', [O::class, 'create'])->name('create')->middleware('role:admin');
+    // Route::post('/create', [O::class, 'store'])->name('store')->middleware('role:admin');
+    // Route::get('/edit/{cat}', [O::class, 'edit'])->name('edit')->middleware('role:admin');
+    // Route::put('/edit/{cat}', [O::class, 'update'])->name('update')->middleware('role:admin');
+    // Route::delete('/delete/{cat}', [O::class, 'destroy'])->name('delete')->middleware('role:admin');
 });
 
 

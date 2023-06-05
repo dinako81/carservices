@@ -2,7 +2,7 @@
 
 namespace App\Entities;
 
-use App\Models\Product;
+use App\Models\Service;
 
 
 
@@ -12,9 +12,9 @@ class Cart{
     public function __construct(array $cart) 
     {
         // constructorius gave cart nukeliauja i DB ir surekta visus productus kurie isvardinti cart. Kad toliau turetumem is ko skaiciuot
-        $productsId = array_keys($cart);
-        $this->products = Product::whereIn('id', $productsId)->get();
-        $this->products = $this->products->map(function($p) use ($cart) {
+        $serviceId = array_keys($cart);
+        $this->service = Service::whereIn('id', $serviceId)->get();
+        $this->service = $this->service->map(function($p) use ($cart) {
             $p->count = $cart[$p->id];
             return $p;
         });
@@ -23,16 +23,16 @@ class Cart{
 
     public function total()
     {
-        return $this->products->reduce(function ($carry, $item) {
+        return $this->service->reduce(function ($carry, $item) {
             return $carry + $item->count * $item->price;
         }, 0);
 
         // $carry kaupiklis, kur kaupiasi suma, $items - productai, 0-prasideda nuo 0.
     }
 
-    public function products()
+    public function service()
     {
-        return $this->products;
+        return $this->service;
     }
 
     // kasike rodys produktus

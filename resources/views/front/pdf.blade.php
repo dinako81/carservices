@@ -30,14 +30,14 @@
 </body>
 
 <table>
-    @foreach($products as $product)
+    @foreach($services as $service)
     <tr>
-        @foreach($product->color as $color)
+        {{-- @foreach($service->color as $color)
         <td style="background-color:{{$color->hex}};">
-            {{$color->title}}
+        {{$color->title}}
         </td>
         @endforeach
-        {!!str_repeat('<td></td>', 5 - $product->color->count())!!}
+        {!!str_repeat('<td></td>', 5 - $service->color->count())!!} --}}
     </tr>
     @endforeach
 

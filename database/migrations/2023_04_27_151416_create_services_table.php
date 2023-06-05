@@ -8,12 +8,16 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('photos', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->string('photo', 200);
+            $table->string('title', 100);
+            $table->string('duration', 6);
+            $table->decimal('price', 6, 2)->unsigned();
             $table->unsignedBigInteger('cat_id');
             $table->foreign('cat_id')->references('id')->on('cats');
         });
@@ -21,9 +25,11 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('photos');
+        Schema::dropIfExists('products');
     }
 };

@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+// use App\Models\Service;
 use App\Models\Cat;
-use App\Models\Color;
-use Illuminate\Http\Request;
-use App\Services\ColorNamingService;
 
-class ProductController extends Controller
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Http\UploadedFile;
+
+class ServiceController extends Controller
 {
     
     public function index()
     {
-        $products = Product::all();
-        return view('back.products.index', [  
-            'products' => $products
+        $services = Service::all();
+        return view('back.services.index', [  
+            'services' => $services
         ]);
     }
 
@@ -23,7 +27,7 @@ class ProductController extends Controller
     public function create()
     {
         $cats = Cat::all();
-        return view('back.products.create', [  
+        return view('back.services.create', [  
             'cats' => $cats
         ]);
     }
@@ -33,7 +37,7 @@ class ProductController extends Controller
 
         $colorsCount = Cat::where('id', $request->cat)->first()->colors_count;
 
-        $html = view('back.products.colors')
+        $html = view('back.servicies.colors')
         ->with(['colorsCount' => $colorsCount])
         ->render();
 
@@ -54,7 +58,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $id = Product::create([
+        $id = service::create([
             'title' => $request->title,
             'price' => $request->price,
             'cat_id' =>$request->cat_id
@@ -68,51 +72,51 @@ class ProductController extends Controller
             ]);
         }
 
-        return redirect()->route('products-index');
+        return redirect()->route('servicies-index');
     }
     
-    public function show(Product $product)
+    public function show(service $service)
     {
         //
     }
 
    
-    public function edit(Product $product)
+    public function edit(service $service)
     {
         $cats = Cat::all();
         
-        return view('back.products.edit', [
-            'product' => $product,
+        return view('back.servicies.edit', [
+            'service' => $service,
             'cats' => $cats
         ]);
     }
 
   
-    public function update(Request $request, Product $product)
+    public function update(Request $request, service $service)
     {
-        $product->update([
+        $service->update([
             'title' => $request->title,
             'price' => $request->price,
             'cat_id' =>$request->cat_id
         ]);
 
-        $product->color()->delete();
+        $service->color()->delete();
 
         foreach ($request->color as $index => $color) {
             Color::create([
                 'title' => $request->name[$index],
                 'hex' => $color,
-                'product_id' => $product->id
+                'product_id' => $service->id
             ]);
         }
 
-        return redirect()->route('products-index');
+        return redirect()->route('servicies-index');
     }
 
    
-    public function destroy(Product $product)
+    public function destroy(service $service)
     {
-        $product->delete();
-        return redirect()->route('products-index');
+        $service->delete();
+        return redirect()->route('servicies-index');
     }
 }

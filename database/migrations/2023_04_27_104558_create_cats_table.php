@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title', 100);
             $table->string('address', 100);
-            $table->string('phone', 100);
+            $table->string('phoneNumber', 100);
         });
     }
 

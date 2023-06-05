@@ -9,7 +9,7 @@ class Cat extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'address', 'phone'];
+    protected $fillable = ['title', 'address', 'phoneNumber'];
     public $timestamps = false;
 
     public function service()

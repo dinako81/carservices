@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name', 30);
             $table->string('surname', 30);
             $table->string('photo', 200)->nullable()->default(null);
-            $table->unsignedBigInteger('service_id');
-            $table->foreign('service_id')->references('id')->on('services');
+            $table->unsignedBigInteger('cat_id');
+            $table->foreign('cat_id')->references('id')->on('cats');
         });
     }
 

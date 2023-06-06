@@ -6,42 +6,32 @@
         <div class="col-8">
             <div class="card mt-5">
                 <div class="card-header">
-                    <h1>Add Category</h1>
+                    <h1>Add Car Service</h1>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('cats-store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('cats-store')}}" method="post">
                         <div class="mb-3">
-                            <label class="form-label">Category title</label>
+                            <label class="form-label">Car service title</label>
                             <input type="text" class="form-control" name="title" value={{old('title')}}>
-                            <div class="form-text">Please add category title here</div>
+                            <div class="form-text">Please add Car service title here</div>
                         </div>
-                        {{-- <div class="mb-3 cat-color-range">
-                            <label class="form-label">Colors Count: <span class="--colors--counter">{{old('colors_count', 1)}}</span></label>
-                        <input type="range" min="1" max="6" class="form-range --colors--counter" name="colors_count" value={{old('colors_count', 1)}}>
-                </div> --}}
-                {{-- <div class="mb-3">
-                            <label class="form-label">Main Cat photo</label>
-                            <input type="file" class="form-control" name="photo">
+                        <div class="mb-3">
+                            <label class="form-label">Car service address</label>
+                            <input type="text" class="form-control" name="address" value={{old('address')}}>
+                            <div class="form-text">Please add address here</div>
                         </div>
-
-
-                        <div class="mb-3" data-gallery="0">
-                            <label class="form-label">Gallery photo <span class="rem">X</span></label>
-                            <input type="file" class="form-control">
+                        <div class="mb-3">
+                            <label class="form-label">Car service pohpne number</label>
+                            <input type="text" class="form-control" name="phoneNumber" value={{+370 - old('phoneNumber')}}>
+                            <div class="form-text">Please add phone number here</div>
                         </div>
 
-                        <div class="gallery-inputs">
-
-                        </div>
-
-                        <button type="button" class="btn btn-secondary --add--gallery">add gallery photo</button> --}}
-
-                <button type="submit" class="btn btn-primary">Submit</button>
-                @csrf
-                </form>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        @csrf
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 @endsection

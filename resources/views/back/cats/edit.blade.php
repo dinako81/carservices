@@ -11,21 +11,28 @@
                 <div class="card-body">
                     <form action="{{route('cats-update', $cat)}}" method="post">
                         <div class="mb-3">
-                            <label class="form-label">Categorie Name</label>
+                            <label class="form-label">Car servise title</label>
                             <input type="text" class="form-control" name="title" value={{old('title', $cat->title)}}>
-                            <div class="form-text">Please add categorie name here</div>
+                            <div class="form-text">Please add car service title here</div>
                         </div>
-                        {{-- <div class="mb-3 cat-color-range">
-                            <label class="form-label">Colors Count: <span class="--colors--counter">{{old('colors_count', $cat->colours_count)}}</span></label>
-                        <input type="range" min="1" max="6" class="form-range --colors--counter" name="colors_count" value={{old('colors_count', $cat->colours_count)}}>
-                </div> --}}
-                <button type="submit" class="btn btn-primary">Submit</button>
-                @csrf
-                @method('put')
-                </form>
+                        <div class="mb-3">
+                            <label class="form-label">Car service address</label>
+                            <input type="text" class="form-control" name="address" value={{old('address', $cat->address)}}>
+                            <div class="form-text">Please add address here</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Car service pohpne number</label>
+                            <input type="text" class="form-control" name="phoneNumber" value={{+370 - old('phoneNumber', $cat->phoneNumbers)}}>
+                            <div class="form-text">Please add phone number here</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        @csrf
+                        @method('put')
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 @endsection

@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Service;
-use App\Models\Photo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
@@ -13,7 +11,7 @@ use Illuminate\Http\UploadedFile;
 class Master extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'surname', 'photo', 'servise_id'];
+    protected $fillable = ['name', 'surname', 'photo', 'cat_id'];
     public $timestamps = false;
 
     public function deletePhoto()
@@ -46,11 +44,14 @@ class Master extends Model
         return $this->hasMany(Photo::class);
     }
 
-    public function gallery()
+    // public function gallery()
+    // {
+    //     return $this->hasMany(Photo::class, 'hotel_id', 'id');
+    // }
+
+    public function cat()
     {
-        return $this->hasMany(Photo::class, 'hotel_id', 'id');
+        return $this->belongsTo(Cat::class);
     }
     
-}
-
 }

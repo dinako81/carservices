@@ -33,12 +33,10 @@ class CatController extends Controller
    
     public function store(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'title' => 'required|min:3|max:100',
-            'colors_count' => 'required|integer|min:1|max:6',
-            'photo' => 'sometimes|required|image|max:512',
-            'gallery.*' => 'sometimes|required|image|max:512'
+            'address' => 'required|min:3|max:100',
+            'phoneNumber' => 'required|numeric',
         ]);
 
         if ($validator->fails()) {
@@ -47,22 +45,16 @@ class CatController extends Controller
                 ->back()
                 ->withErrors($validator);
         }
-        $photo = $request->photo;
-        if ($photo) {
-            $name = $cat->savePhoto($photo);
-        }
-        
+                
         $id = Cat::create([
             'title' => $request->title,
-            'colors_count' => $request->colors_count,
-            'photo' => $name ?? null
+            'address' => $request->address,
+            'phoneNumber' => $request->phoneNumber,
         ])->id;
 
-        foreach ($request->gallery ?? [] as $gallery) {
-            Photo::add($gallery, $id);
-        }
-
-        return redirect()->route('cats-index');
+        return redirect()
+        ->route('cats-index')
+        ->with('ok', 'New Car service was created');
     }
 
 
@@ -78,33 +70,24 @@ class CatController extends Controller
     {
         $cat->update([
             'title' => $request->title,
-            'colors_count' => $request->colors_count,
+            'address' => $request->address,
+            'phoneNumber' => $request->phoneNumber,
+            
         ]);
-        return redirect()->route('cats-index');
+        return redirect()->route('cats-index')
+        ->with('ok', 'New Car service was updated');
     }
 
    
     public function destroy(Cat $cat)
     {
-        // jeigu yra galerija, einam per galerija, ta nuotrauka istrinam ir tada istrinam categiroja
-        if ($cat->gallery->count()) {
-            foreach ($cat->gallery as $gal) {
-                $gal->deletePhoto();
-            }
-        }
-        
-        if ($cat->photo) {
-            $cat->deletePhoto();
-        }
-        
+              
         $cat->delete();
-        return redirect()->route('cats-index');
+        return redirect()->route('cats-index')
+        ->with('warn', 'Car service was deleted');
+
     }
 
 
-    public function destroyPhoto(Photo $photo)
-    {
-        $photo->deletePhoto();
-        return redirect()->back();
-    }
+   
 }

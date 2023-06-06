@@ -16,6 +16,9 @@ class Cat extends Model
     {
         return $this->hasMany(Service::class);
     }
-
+    public function master()
+    {
+        return $this->hasMany(Master::class);
+    }
     
 }

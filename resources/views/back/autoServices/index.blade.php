@@ -6,7 +6,7 @@
         <div class="col-12">
             <div class="card mt-5">
                 <div class="card-header">
-                    <h1>Serviciess List</h1>
+                    <h1>Services List</h1>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
@@ -15,26 +15,23 @@
                             <div class="services-list">
                                 <div class="service">
                                     <div class="title-price">
-                                        <div>
-                                            <h2>{{$service->title}}<span>{{$service->price}} EUR</span></h2>
-
+                                        <div class="col-8">
+                                            <h2>{{$service->title}}</h2>
                                         </div>
-                                        @if(Auth::user()->role < 5) <div class="buttons">
-                                            <a href="{{route('services-edit', $service)}}" class="btn btn-outline-success">Edit</a>
-                                            <form action="{{route('services-delete', $service)}}" method="post">
-                                                <button type="submit" class="btn btn-outline-danger">delete</button>
-                                                @csrf
-                                                @method('delete')
-                                            </form>
+                                        <div class="col-8">
+                                            <h2><span>{{$service->price}} EUR</span></h2>
+                                        </div>
+                                        <div class="col-8">
+                                            @if(Auth::user()->role < 5) <div class="buttons">
+                                                <a href="{{route('services-edit', $service)}}" class="btn btn-outline-success">Edit</a>
+                                                <form action="{{route('services-delete', $service)}}" method="post">
+                                                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                                    @csrf
+                                                    @method('delete')
+                                                </form>
+                                        </div>
                                     </div>
                                     @endif
-                                </div>
-                                <div class="colors">
-                                    @foreach($service->color as $color)
-                                    <div class="color" style="background-color:{{$color->hex}};">
-                                        {{$color->title}}
-                                    </div>
-                                    @endforeach
                                 </div>
                             </div>
                 </div>

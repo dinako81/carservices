@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Master;
+use App\Models\Cat;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Http\UploadedFile;
 
 class MasterController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         $masters = Master::all();
@@ -19,36 +23,66 @@ class MasterController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+   
     public function create()
-    {
-        //
+    {      
+        $cats = Cat::all();
+        $masters= Master::all();
+
+        return view('back.masters.create', [  
+            'masters' => $masters,
+            'cats' => $cats,
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreMasterRequest $request)
+  
+    public function store(Request $request, Master $master)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:3|max:100',
+            'surname' => 'required|min:3|max:100',
+            'photo' => 'sometimes|required|image|max:512',
+             ]);
+
+        if ($validator->fails()) {
+            $request->flash();
+            return redirect()
+                ->back()
+                ->withErrors($validator);
+        }
+        
+        $photo = $request->photo;
+        if ($photo) {
+            $name = $master->savePhoto($photo);
+        }
+        $id = Master::create([
+            'cat_id' => $request->cat_id,
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'photo' => $name ?? null
+        ])->id;
+
+      
+        return redirect()
+        ->route('masters-index')
+        ->with('ok', 'New Master was created');
     }
 
-    /**
-     * Display the specified resource.
-     */
+   
     public function show(Master $master)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+   
     public function edit(Master $master)
     {
-        //
+        $services = Service::all();
+        
+        return view('back.masters.edit', [
+            'master' => $master,
+            'services' => $services
+        ]);
     }
 
     /**

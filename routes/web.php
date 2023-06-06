@@ -42,6 +42,7 @@ Route::prefix('cats')->name('cats-')->group(function () {
     Route::get('/', [C::class, 'index'])->name('index')->middleware('role:admin');
     Route::get('/create', [C::class, 'create'])->name('create')->middleware('role:admin');
     Route::post('/create', [C::class, 'store'])->name('store')->middleware('role:admin');
+    Route::get('/{cat}', [C::class, 'show'])->name('show')->middleware('role:admin');
     Route::get('/edit/{cat}', [C::class, 'edit'])->name('edit')->middleware('role:admin');
     Route::put('/edit/{cat}', [C::class, 'update'])->name('update')->middleware('role:admin');
     Route::delete('/delete/{cat}', [C::class, 'destroy'])->name('delete')->middleware('role:admin');

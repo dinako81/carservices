@@ -12,10 +12,11 @@ class Cat extends Model
     protected $fillable = ['title', 'address', 'phoneNumber'];
     public $timestamps = false;
 
-    public function service()
+    public function catService()
     {
         return $this->hasMany(Service::class);
     }
+    
     public function master()
     {
         return $this->hasMany(Master::class);

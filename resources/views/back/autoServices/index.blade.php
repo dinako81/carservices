@@ -22,6 +22,9 @@
                                             <h2><span>{{$service->price}} EUR</span></h2>
                                         </div>
                                         <div class="col-8">
+                                            <h2><span>{{$service->cat->title}}</span></h2>
+                                        </div>
+                                        <div class="col-8">
                                             @if(Auth::user()->role < 5) <div class="buttons">
                                                 <a href="{{route('services-edit', $service)}}" class="btn btn-outline-success">Edit</a>
                                                 <form action="{{route('services-delete', $service)}}" method="post">

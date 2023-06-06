@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cat;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -57,6 +58,22 @@ class CatController extends Controller
         ->with('ok', 'New Car service was created');
     }
 
+    public function show (Service $service, Cat $cat)
+    {
+        // $cats = Cat::all();
+        $services = Service::all();
+
+        // dump($cat->catService()->title);
+        // die;
+
+        return view('back.cats.show', [
+            // 'cats' => $cats,
+            // 'catService'=> $cat->catService(),
+            // 'services' => $services,
+            // 'service' => $service,
+            'cat' => $cat,
+        ]);
+    }
 
     public function edit(Cat $cat)
     {
